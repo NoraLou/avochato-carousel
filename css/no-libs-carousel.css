@@ -25,10 +25,25 @@
   /* transition: transform 0.5s, opacity 0.5s, z-index 0.5s; */
 }
 
-.carousel__img.start {
+.carousel__img.start,
+.carousel__img.active {
   opacity: 1;
   position: relative;
   z-index: 900;
+}
+
+.carousel__img.prev,
+.carousel__img.next {
+  z-index: 800;
+}
+
+.carousel__img.prev {
+  transform: translateX(-100%);
+}
+
+/* Translate next item to the right */
+.carousel__img.next {
+  transform: translateX(100%);
 }
 
 .carousel__btn--next,
