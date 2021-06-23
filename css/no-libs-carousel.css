@@ -30,3 +30,47 @@
   position: relative;
   z-index: 900;
 }
+
+.carousel__btn--next,
+.carousel__btn--prev {
+  position: absolute;
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  background-color: gainsboro;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.carousel__btn--next {
+  left: 0;
+}
+
+.carousel__btn--prev {
+  right: 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.pagination__btn {
+  margin-right: 1rem;
+  height: 1rem;
+  width: 1rem;
+  border: none;
+  border-radius: 50%;
+  background-color: whitesmoke;
+  cursor: pointer;
+  padding: 0;
+  border: solid darkgray 1px;
+  transition: background-color 0.5s ease;
+}
+
+.pagination__btn:hover,
+.pagination__btn.active {
+  background-color: darkgray;
+}
