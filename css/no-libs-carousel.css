@@ -1,0 +1,32 @@
+.wrapper {
+  overflow: hidden;
+  width: 80%;
+  margin: 60px auto;
+  border: solid blue 2px;
+}
+
+.wrapper * {
+  box-sizing: border-box;
+}
+
+.carousel {
+  border: solid green 2px;
+  position: relative;
+}
+
+.carousel__img {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  margin: auto;
+  padding: 0.5rem 3rem;
+  z-index: 100;
+  /* transition: transform 0.5s, opacity 0.5s, z-index 0.5s; */
+}
+
+.carousel__img.start {
+  opacity: 1;
+  position: relative;
+  z-index: 900;
+}
