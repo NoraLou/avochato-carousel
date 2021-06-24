@@ -10,7 +10,7 @@ class Carousel {
 
     this.moveNext = this.moveNext.bind(this);
     this.movePrev = this.movePrev.bind(this);
-    this.paginationBtns = this.handlePagination.bind(this);
+    this.handlePagination = this.handlePagination.bind(this);
   }
 
   init() {
@@ -58,11 +58,10 @@ class Carousel {
   }
 
   moveNext() {
-    console.log('move next')
     if (this.curr === this.imagesArr.length - 1) {
-      this.curr = 0;
+      this.curr = 0
     } else {
-      this.curr++
+      this.curr++;
     }
     this.goToSlide(this.curr)
   }
@@ -86,7 +85,15 @@ class Carousel {
 
   handlePagination(e) {
     const newIdx = e.target.dataset.ref
-    console.log(`newIdx ${newIdx}`);
+    if (this.curr < newIdx) {
+      let toMoveNext = newIdx - this.curr;
+      if (this.curr === this.imagesArr.length - 1) {
+        this.curr = 0 + toMoveNext
+      } else {
+        this.curr += toMoveNext
+      }
+      this.goToSlide(this.curr)
+    }
   }
 
 }
