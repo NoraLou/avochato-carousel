@@ -95,6 +95,7 @@ class Carousel {
     this.disableLoop()
     const newIdx = e.target.dataset.ref
     if (this.curr < newIdx) {
+
       let toMoveNext = newIdx - this.curr;
       if (this.curr === this.imagesArr.length - 1) {
         this.curr = 0 + toMoveNext
@@ -103,8 +104,10 @@ class Carousel {
       }
       this.goToSlide(this.curr)
     } else if (this.curr > newIdx) {
+      this.imagesArr[this.curr].classList = IMGS_CLASS_NAME
       let toMovePrev = this.curr - newIdx
       this.curr -= toMovePrev
+      console.log('HERE : ', this.curr)
       this.goToSlide(this.curr)
     }
   }
