@@ -5,8 +5,9 @@ class Carousel {
   constructor() {
     this.imagesArr = document.getElementsByClassName(IMGS_CLASS_NAME);
     this.dotsArr = Array.from(document.getElementsByClassName(DOTS_BASE_NAME));
-    this.moving = true;
+    this.moving = false;
     this.curr = 0;
+    this.interval = null;
 
     this.moveNext = this.moveNext.bind(this);
     this.movePrev = this.movePrev.bind(this);
@@ -18,12 +19,19 @@ class Carousel {
     this.imagesArr[this.imagesArr.length - 1].classList.add('prev');
     this.imagesArr[this.curr].classList.add('active');
     this.imagesArr[1].classList.add('next')
-    this.moving = false;
     this.setActiveIndicator(this.curr);
+    this.loop()
   }
 
-  // loop() {
-  // }
+  loop() {
+
+    this.moving = true;
+    this.interval = setInterval(this.moveNext,2000)
+  }
+
+  disableLoop() {
+
+  }
 
   goToSlide(slide) {
     let newPrev = slide - 1;
