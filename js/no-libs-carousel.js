@@ -5,7 +5,6 @@ class Carousel {
   constructor() {
     this.imagesArr = document.getElementsByClassName(IMGS_CLASS_NAME);
     this.dotsArr = Array.from(document.getElementsByClassName(DOTS_BASE_NAME));
-    this.moving = false;
     this.curr = 0;
     this.interval = null;
 
@@ -15,7 +14,6 @@ class Carousel {
   }
 
   init() {
-    console.log('Init!')
     this.imagesArr[this.imagesArr.length - 1].classList.add('prev');
     this.imagesArr[this.curr].classList.add('active');
     this.imagesArr[1].classList.add('next');
@@ -24,7 +22,6 @@ class Carousel {
   }
 
   loop() {
-    this.moving = true;
     this.interval = setInterval(this.moveNext,2500)
   }
 
@@ -37,13 +34,12 @@ class Carousel {
     let newNext = slide + 1;
     let oldPrev = slide - 2;
     let oldNext = slide + 2;
-    //check if the newPrev if out of bounds
+
     if (newPrev <= 0) {
       oldPrev = (this.imagesArr.length - 1)
     } else if (newNext >= (this.imagesArr.length - 1)) {
       oldNext = 0
     }
-    //check if currSlide is at beginning or end
     if (slide === 0) {
       newPrev = (this.imagesArr.length - 1);
       oldPrev = (this.imagesArr.length - 2);
@@ -95,7 +91,6 @@ class Carousel {
     this.disableLoop()
     const newIdx = e.target.dataset.ref
     if (this.curr < newIdx) {
-
       let toMoveNext = newIdx - this.curr;
       if (this.curr === this.imagesArr.length - 1) {
         this.curr = 0 + toMoveNext
@@ -107,11 +102,9 @@ class Carousel {
       this.imagesArr[this.curr].classList = IMGS_CLASS_NAME
       let toMovePrev = this.curr - newIdx
       this.curr -= toMovePrev
-      console.log('HERE : ', this.curr)
       this.goToSlide(this.curr)
     }
   }
-
 }
 
 const nextBtn = document.querySelector('.carousel__btn--next');

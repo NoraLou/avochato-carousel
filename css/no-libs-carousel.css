@@ -1,8 +1,13 @@
+section {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5%;
+}
+
 .wrapper {
   overflow: hidden;
   width: 80%;
   margin: 60px auto;
-  border: solid blue 2px;
 }
 
 .wrapper * {
@@ -10,7 +15,6 @@
 }
 
 .carousel {
-  border: solid green 2px;
   position: relative;
 }
 
@@ -52,10 +56,17 @@
   top: 50%;
   width: 2rem;
   height: 2rem;
-  background-color: gainsboro;
+  background: whitesmoke;
+  border: solid darkgray 1px;
   border-radius: 50%;
   cursor: pointer;
   z-index: 999;
+  transition: background-color 0.5s ease;
+}
+
+.carousel__btn--next:hover,
+.carousel__btn--prev:hover {
+  background-color: darkgray;
 }
 
 .carousel__btn--next {
