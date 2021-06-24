@@ -1,15 +1,16 @@
-const BASE_CLASS_NAME = 'carousel__img';
-
-
+const IMGS_CLASS_NAME = 'carousel__img';
+const DOTS_BASE_NAME = 'pagination__btn';
 
 class Carousel {
   constructor() {
-    this.imagesArr = document.getElementsByClassName(BASE_CLASS_NAME);
+    this.imagesArr = document.getElementsByClassName(IMGS_CLASS_NAME);
+    this.dotsArr = Array.from(document.getElementsByClassName(DOTS_BASE_NAME));
     this.moving = true;
     this.curr = 0;
 
-    this.moveNext = this.moveNext.bind(this)
-    this.movePrev = this.movePrev.bind(this)
+    this.moveNext = this.moveNext.bind(this);
+    this.movePrev = this.movePrev.bind(this);
+    this.paginationBtns = this.handlePagination.bind(this);
   }
 
   init() {
@@ -18,24 +19,23 @@ class Carousel {
     this.imagesArr[this.curr].classList.add('active');
     this.imagesArr[1].classList.add('next')
     this.moving = false;
+    this.setActiveIndicator();
   }
 
-  loop() {
-  }
+  // loop() {
+  // }
 
   goToSlide(slide) {
     let newPrev = slide - 1;
     let newNext = slide + 1;
     let oldPrev = slide - 2;
     let oldNext = slide + 2;
-
     //check if the newPrev if out of bounds
     if (newPrev <= 0) {
       oldPrev = (this.imagesArr.length - 1)
     } else if (newNext >= (this.imagesArr.length - 1)) {
       oldNext = 0
     }
-
     //check if currSlide is at beginning or end
     if (slide === 0) {
       newPrev = (this.imagesArr.length - 1);
@@ -47,16 +47,15 @@ class Carousel {
       oldNext = 1;
     }
 
-    this.imagesArr[oldPrev].className = BASE_CLASS_NAME;
-    this.imagesArr[oldNext].className = BASE_CLASS_NAME;
-    this.imagesArr[newPrev].className = BASE_CLASS_NAME + ' prev';
-    this.imagesArr[slide].className = BASE_CLASS_NAME + ' active';
-    this.imagesArr[newNext].className = BASE_CLASS_NAME + ' next';
-    //update class reference after transition
+    this.imagesArr[oldPrev].className = IMGS_CLASS_NAME;
+    this.imagesArr[oldNext].className = IMGS_CLASS_NAME;
+    this.imagesArr[newPrev].className = IMGS_CLASS_NAME + ' prev';
+    this.imagesArr[slide].className = IMGS_CLASS_NAME + ' active';
+    this.imagesArr[newNext].className = IMGS_CLASS_NAME + ' next';
+
     this.curr = slide;
-
+    this.setActiveIndicator(this.curr)
   }
-
 
   moveNext() {
     console.log('move next')
@@ -65,7 +64,6 @@ class Carousel {
     } else {
       this.curr++
     }
-    //move to updated value
     this.goToSlide(this.curr)
   }
 
@@ -80,16 +78,29 @@ class Carousel {
     this.goToSlide(this.curr);
   }
 
+  setActiveIndicator() {
+    this.dotsArr.forEach( dot => dot.className = DOTS_BASE_NAME)
+    this.dotsArr[this.curr].classList += ' active'
+  }
+
+  handlePagination(e) {
+    const newIdx = e.target.dataset.ref
+    console.log(`newIdx ${newIdx}`)
+
+  }
+
 }
 
-const nextBtn = document.querySelector('.carousel__btn--next')
-const prevBtn = document.querySelector('.carousel__btn--prev')
+const nextBtn = document.querySelector('.carousel__btn--next');
+const prevBtn = document.querySelector('.carousel__btn--prev');
+const paginationBtns = Array.from(document.querySelectorAll('.pagination__btn'));
+
+console.log('paginationBtns', paginationBtns)
+
 const myCarousel = new Carousel();
-
-// console.log('prevButton', prevBtn)
-// console.log('nextButton', prevBtn)
-// console.log(`imagesArr ${myCarousel.imagesArr}`)
-
 window.onload = myCarousel.init();
+
 prevBtn.addEventListener('click',  myCarousel.movePrev);
 nextBtn.addEventListener('click', myCarousel.moveNext);
+paginationBtns.forEach( btn => btn.addEventListener('click', myCarousel.handlePagination))
+
