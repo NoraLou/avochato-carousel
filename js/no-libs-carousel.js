@@ -23,18 +23,18 @@ class Carousel {
     this.moving = false;
   }
 
-  disableInteraction() {
-    this.moving = true;
-    setTimeout(function () {
-      this.moving = false
-    },500)
-  }
+  // disableInteraction() {
+  //   this.moving = true;
+  //   setTimeout(function () {
+  //     this.moving = false
+  //   },500)
+  // }
 
   loop() {
   }
 
   increment() {
-    console.log('increment!')
+    // console.log('increment!')
     let oldPrev = this.prev;
     this.prev = this.curr;
     this.curr = this.next;
@@ -50,7 +50,6 @@ class Carousel {
   }
 
   moveNext() {
-    console.log('move Next')
     this.increment()
   }
 
