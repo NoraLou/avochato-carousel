@@ -52,6 +52,9 @@ class Carousel {
     this.imagesArr[newPrev].className = BASE_CLASS_NAME + ' prev';
     this.imagesArr[slide].className = BASE_CLASS_NAME + ' active';
     this.imagesArr[newNext].className = BASE_CLASS_NAME + ' next';
+    //update class reference after transition
+    this.curr = slide;
+
   }
 
 
@@ -67,7 +70,14 @@ class Carousel {
   }
 
   movePrev() {
-
+    console.log('move prev')
+    if (this.curr === 0) {
+      this.curr = this.imagesArr.length - 1;
+    } else {
+      this.curr--;
+    }
+    //move to value
+    this.goToSlide(this.curr);
   }
 
 }
