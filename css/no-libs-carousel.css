@@ -59,11 +59,11 @@
 }
 
 .carousel__btn--next {
-  left: 0;
+  right: 0;
 }
 
 .carousel__btn--prev {
-  right: 0;
+  left: 0;
 }
 
 .pagination {
