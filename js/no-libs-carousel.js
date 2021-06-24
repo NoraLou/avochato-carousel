@@ -18,19 +18,18 @@ class Carousel {
     console.log('Init!')
     this.imagesArr[this.imagesArr.length - 1].classList.add('prev');
     this.imagesArr[this.curr].classList.add('active');
-    this.imagesArr[1].classList.add('next')
+    this.imagesArr[1].classList.add('next');
     this.setActiveIndicator(this.curr);
-    this.loop()
+    this.loop();
   }
 
   loop() {
-
     this.moving = true;
-    this.interval = setInterval(this.moveNext,2000)
+    this.interval = setInterval(this.moveNext,2500)
   }
 
   disableLoop() {
-
+    clearInterval(this.interval)
   }
 
   goToSlide(slide) {
@@ -63,9 +62,11 @@ class Carousel {
 
     this.curr = slide;
     this.setActiveIndicator(this.curr)
+    this.loop();
   }
 
   moveNext() {
+    this.disableLoop()
     if (this.curr === this.imagesArr.length - 1) {
       this.curr = 0
     } else {
@@ -75,13 +76,12 @@ class Carousel {
   }
 
   movePrev() {
-    console.log('move prev')
+    this.disableLoop()
     if (this.curr === 0) {
       this.curr = this.imagesArr.length - 1;
     } else {
       this.curr--;
     }
-    //move to value
     this.goToSlide(this.curr);
   }
 
@@ -92,6 +92,7 @@ class Carousel {
   }
 
   handlePagination(e) {
+    this.disableLoop()
     const newIdx = e.target.dataset.ref
     if (this.curr < newIdx) {
       let toMoveNext = newIdx - this.curr;
@@ -101,20 +102,10 @@ class Carousel {
         this.curr += toMoveNext
       }
       this.goToSlide(this.curr)
-
-
     } else if (this.curr > newIdx) {
-      console.log('this.curr :', this.curr)
-      console.log('newIdx :', newIdx)
-
       let toMovePrev = this.curr - newIdx
       this.curr -= toMovePrev
       this.goToSlide(this.curr)
-      // if (this.curr === 0) {
-      //   this.curr = (this.imagesArr.length - 1) + toMovePrev
-      // } else {
-      //   this.curr -= toMovePrev
-      // }
     }
   }
 
