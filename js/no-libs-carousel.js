@@ -19,7 +19,7 @@ class Carousel {
     this.imagesArr[this.curr].classList.add('active');
     this.imagesArr[1].classList.add('next')
     this.moving = false;
-    this.setActiveIndicator();
+    this.setActiveIndicator(this.curr);
   }
 
   // loop() {
@@ -78,15 +78,15 @@ class Carousel {
     this.goToSlide(this.curr);
   }
 
-  setActiveIndicator() {
-    this.dotsArr.forEach( dot => dot.className = DOTS_BASE_NAME)
-    this.dotsArr[this.curr].classList += ' active'
+  setActiveIndicator(idx) {
+    this.dotsArr.forEach(dot => dot.className = DOTS_BASE_NAME)
+    let toSetActive = document.querySelector(`[data-ref="${idx}"]`)
+    toSetActive.classList += ' active'
   }
 
   handlePagination(e) {
     const newIdx = e.target.dataset.ref
-    console.log(`newIdx ${newIdx}`)
-
+    console.log(`newIdx ${newIdx}`);
   }
 
 }
@@ -94,8 +94,6 @@ class Carousel {
 const nextBtn = document.querySelector('.carousel__btn--next');
 const prevBtn = document.querySelector('.carousel__btn--prev');
 const paginationBtns = Array.from(document.querySelectorAll('.pagination__btn'));
-
-console.log('paginationBtns', paginationBtns)
 
 const myCarousel = new Carousel();
 window.onload = myCarousel.init();
