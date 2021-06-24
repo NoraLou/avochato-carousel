@@ -93,6 +93,20 @@ class Carousel {
         this.curr += toMoveNext
       }
       this.goToSlide(this.curr)
+
+
+    } else if (this.curr > newIdx) {
+      console.log('this.curr :', this.curr)
+      console.log('newIdx :', newIdx)
+
+      let toMovePrev = this.curr - newIdx
+      this.curr -= toMovePrev
+      this.goToSlide(this.curr)
+      // if (this.curr === 0) {
+      //   this.curr = (this.imagesArr.length - 1) + toMovePrev
+      // } else {
+      //   this.curr -= toMovePrev
+      // }
     }
   }
 
